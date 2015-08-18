@@ -1,32 +1,13 @@
-from flask import Flask, jsonify, render_template
+from flask import Flask
 
-app = Flask(__name__)
+def register_blueprints(app_instance):
+    from .views.pages import pages_bp
+    from .views.wiki import wiki_bp
+    app_instance.register_blueprint(pages_bp)
+    app_instance.register_blueprint(wiki_bp)
 
-@app.route('/')
-def index():
-    data = {
-        'title': 'Saluton, Mondo',
-        'body': 'Bonvenon al mia retpagaro!'
-    }
-    return render_template('index.html', data=data)
+app = Flask(__name__, instance_relative_config=True)
 
-@app.route('/page/<int:page_id>')
-def pages(page_id):
-    # Here you could do a database query to find the page with the ID of
-    # `page_id`
-    data = {}
-    data['page_number'] = page_id
-    data['type'] = 'page'
-    data['message'] = 'You are viewing page #'
-    return jsonify(data)
+app.debug = True
 
-@app.route('/wiki/Virtualenv')
-def virtualenv_whatever_you_want():
-    data = {
-        'title': 'About Virtualenvs',
-        'body': 'This is a page about Virtualenvs!!!'
-    }
-    return render_template('wiki/virtualenv.html', data=data)
-
-if __name__ == '__main__':
-    app.run(debug=True)
+register_blueprints(app)
