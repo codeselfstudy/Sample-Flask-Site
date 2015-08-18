@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, jsonify
 
 app = Flask(__name__)
 
@@ -10,7 +10,11 @@ def index():
 def pages(page_id):
     # Here you could do a database query to find the page with the ID of
     # `page_id`
-    return 'You are viewing page #{}'.format(page_id)
+    data = {}
+    data['page_number'] = page_id
+    data['type'] = 'page'
+    data['message'] = 'You are viewing page #'
+    return jsonify(data)
 
 @app.route('/wiki/Virtualenv')
 def virtualenv_whatever_you_want():
