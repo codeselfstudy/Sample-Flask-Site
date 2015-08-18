@@ -1,10 +1,14 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, render_template
 
 app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return 'Saluton, Mondo!'
+    data = {
+        'title': 'Saluton, Mondo',
+        'body': 'Bonvenon al mia retpagaro!'
+    }
+    return render_template('index.html', data=data)
 
 @app.route('/page/<int:page_id>')
 def pages(page_id):
