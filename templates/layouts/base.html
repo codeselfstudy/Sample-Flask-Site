@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ data.title }}</title>
+</head>
+<body>
+    {% include 'includes/nav.html' %}
+
+    {% block content %}{% endblock %}
+
+    {% include 'includes/footer.html' %}
+    {% block footer_scripts %}{% endblock %}
+</body>
+</html>

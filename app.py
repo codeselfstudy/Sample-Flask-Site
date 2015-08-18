@@ -22,7 +22,11 @@ def pages(page_id):
 
 @app.route('/wiki/Virtualenv')
 def virtualenv_whatever_you_want():
-    return 'This is a page about Virtualenvs!!!'
+    data = {
+        'title': 'About Virtualenvs',
+        'body': 'This is a page about Virtualenvs!!!'
+    }
+    return render_template('wiki/virtualenv.html', data=data)
 
 if __name__ == '__main__':
     app.run(debug=True)
